@@ -30,6 +30,21 @@ public class CustomerManagement {
 		return customerObj.getAllCustomers(); 
 	}
 	
+	//Read single data from database
+	@GET
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getaCustomer(String cstmid)
+	{
+		JsonObject customObj = new JsonParser().parse(cstmid).getAsJsonObject();
+		
+		String customerID = customObj.get("customerID").getAsString();
+		
+		String output=customerObj.getACustomerDetails(customerID);
+		return output;
+	}
+	
 	
 	//Insert Data into Database
 	@POST
